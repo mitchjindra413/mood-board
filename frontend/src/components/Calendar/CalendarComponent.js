@@ -17,10 +17,7 @@ export const Calendar = () => {
     const endMonth = value.clone().endOf("month").endOf('week')
 
     useEffect(() => {
-        dispatch(fetchPosts( user._id, {
-            startDate: value.clone().startOf('month'),
-            endDate: value.clone().endOf('month')
-        }))
+        dispatch(fetchPosts( user._id ))
     }, [value])
     
     useEffect(() => {

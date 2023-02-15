@@ -55,13 +55,13 @@ exports.restoreUser = (req, res, next) => {
 exports.loginUser = async function (user) {
     const userInfo = {
         _id: user._id,
-        username: user.username,
+        name: user.name,
         email: user.email
     }
     const token = await jwt.sign(
         userInfo, 
         secretOrKey, 
-        { expiresIn: 3600 } // tell the key to expire in one hour
+        // { expiresIn: 3600 } // tell the key to expire in one hour
     )
     return {
         user: userInfo,

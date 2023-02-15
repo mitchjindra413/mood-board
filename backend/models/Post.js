@@ -11,6 +11,15 @@ const postSchema = Schema({
     },
     high: {
         type: String
+    },
+    moodPic: {
+        type: String
+    },
+    day: {
+        type: Date
+    },
+    rating: {
+        type: Number
     }
 }, {
     timestamps: true

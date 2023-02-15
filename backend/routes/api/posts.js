@@ -8,7 +8,8 @@ const {requireUser} = require('../../config/passport')
 const validatePostInput = require('../../validations/posts')
 
 // Show all posts by User
-router.get('/posts/:userId', async (req, res, next) => {
+router.get('/users/:userId', async (req, res, next) => {
+    console.log(req.params.userId)
     let user;
     try {
         user = await User.findById(req.params.userId)
@@ -18,23 +19,25 @@ router.get('/posts/:userId', async (req, res, next) => {
         error.errors = {message: "No user found with that id"}
         return next(error)
     }
-
+    
     try {
         const posts = await Post.find({
-            author: user._id, 
-            created_on: {
-                $gte: req.query.startDate,
-                $lt: req.query.endDate
-            }})
+            author: user._id
+            })
             .sort({createdAt: -1})
         
         postsObj = {}
         for (const post of posts) {
-            postsObj[post.created_on] = post
+            const year = post.createdAt.getFullYear()
+            const month = post.createdAt.getMonth()
+            const day = post.createdAt.getDay()
+            postsObj[`${year}-${month}-${day}`] = post
         }
+        
         return res.json(postsObj)
         
     } catch(err) {
+        console.log(err)
         return res.json([])
     }
 })
@@ -55,17 +58,18 @@ router.get('/:id', async (req, res, next) => {
 
 // Make post
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
-    let post = await Post.findBy({author: req.params._id, createdAt: new Date()})
+    let post = await Post.find({author: req.params._id, createdAt: new Date()})
     if (post) {
         const error = new Error('Only one journal per day')
         error.statusCode = 404
-        error.errors = { message: 'No post found with that id' }
+        error.errors = { message: 'Only one journal per day' }
         return next(error)
     }
 
     try {
         const newPost = new Post({
-            caption: req.body.caption,
+            note: req.body.caption,
+            high: req.body.high,
             author: req.user._id
         })
 
