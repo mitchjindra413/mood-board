@@ -40,7 +40,6 @@ export const Calendar = () => {
         if (day.isAfter(today, 'day') || day.month() !== value.month()) {
             return 'invalid-day'
         } else if(day == today) {
-            console.log(day, today)
             return 'today'
         } else {
             return 'day'
@@ -65,9 +64,9 @@ export const Calendar = () => {
             </div>
             <div className="calendar-body">
                 {calendar.map(week => (
-                    <div className="week"> 
+                    <div className="week" key={week}> 
                         {week.map(day => (
-                            <button className={styling(day)} >
+                            <button key={day} className={styling(day)} >
                                 {day.format('D')}
                             </button>
                         ))}
