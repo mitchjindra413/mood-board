@@ -24,10 +24,10 @@ export const clearPostErrors = errors => ({
     type: CLEAR_POST_ERRORS
 })
 
-export const fetchPosts = (times) => async dispatch => {
+export const fetchPosts = (userId, filter) => async dispatch => {
     try {
-        const filterParams = new URLSearchParams(times)
-        const res = await jwtFetch(`/api/posts?${filterParams}`)
+        const filterParams = new URLSearchParams(filter)
+        const res = await jwtFetch(`/api/posts/${userId}?${filterParams}`)
         const posts = await res.json()
         dispatch(receivePosts(posts))
     } catch (err) {

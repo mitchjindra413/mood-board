@@ -7,20 +7,8 @@ const Post = mongoose.model('Post')
 const {requireUser} = require('../../config/passport')
 const validatePostInput = require('../../validations/posts')
 
-// Show all posts
-router.get('/', async (req, res, next) => {
-    try{
-        const posts = await Post.find()
-            .populate("author", "_id, username")
-            .sort({ createdAt: -1})
-        return res.json(posts)
-    } catch(err) {
-        return res.json([])
-    }
-});
-
 // Show all posts by User
-router.get('/user/:userId', async (req, res, next) => {
+router.get('/posts/:userId', async (req, res, next) => {
     let user;
     try {
         user = await User.findById(req.params.userId)
@@ -32,11 +20,20 @@ router.get('/user/:userId', async (req, res, next) => {
     }
 
     try {
-        const posts = await Post.find({author: user._id})
+        const posts = await Post.find({
+            author: user._id, 
+            created_on: {
+                $gte: req.query.startDate,
+                $lt: req.query.endDate
+            }})
             .sort({createdAt: -1})
-            .populate("author", "_id, username")
         
-        return res.json(posts)
+        postsObj = {}
+        for (const post of posts) {
+            postsObj[post.created_on] = post
+        }
+        return res.json(postsObj)
+        
     } catch(err) {
         return res.json([])
     }
@@ -46,7 +43,6 @@ router.get('/user/:userId', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try{
         const post = await Post.findById(req.params.id)
-            .populate("author", "id, username")
         
         return res.json(post)
     } catch(err) {
@@ -59,6 +55,14 @@ router.get('/:id', async (req, res, next) => {
 
 // Make post
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
+    let post = await Post.findBy({author: req.params._id, createdAt: new Date()})
+    if (post) {
+        const error = new Error('Only one journal per day')
+        error.statusCode = 404
+        error.errors = { message: 'No post found with that id' }
+        return next(error)
+    }
+
     try {
         const newPost = new Post({
             caption: req.body.caption,
@@ -66,7 +70,6 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
         })
 
         let post = await newPost.save()
-        post = await post.populate('author', '_id, username')
         return res.json(post)
     } catch(err){
         next(err)
@@ -74,7 +77,7 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 })
 
 // Edit post
-router.patch('/:postId', requireUser, validatePostInput, async(req, res, next) => {
+router.put('/:postId', requireUser, validatePostInput, async(req, res, next) => {
     try {
         const post = await Post.findById(req.params.postId)
 

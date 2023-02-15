@@ -1,14 +1,27 @@
 import moment from "moment"
 import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchPosts } from "../../store/posts"
 import './Calendar.css'
 
 export const Calendar = () => {
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
+    const posts = useSelector(state => state.entities.posts)
+
     const [calendar, setCalendar] = useState([])
     const [value, setValue] = useState(moment())
     const today = moment()
 
     const startMonth = value.clone().startOf("month").startOf("week")
     const endMonth = value.clone().endOf("month").endOf('week')
+
+    useEffect(() => {
+        dispatch(fetchPosts( user._id, {
+            startDate: value.clone().startOf('month'),
+            endDate: value.clone().endOf('month')
+        }))
+    }, [value])
     
     useEffect(() => {
         const day = startMonth.clone().subtract(1, 'day')
@@ -19,9 +32,9 @@ export const Calendar = () => {
         setCalendar(temp)
     }, [value])
     
-    const isSelected = (day) => {
-        return value.isSame(day, 'day')
-    }
+    // const isSelected = (day) => {
+    //     return value.isSame(day, 'day')
+    // }
 
     const monthSwitch = (oper) => {
         switch(oper){

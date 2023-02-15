@@ -2,11 +2,14 @@ const { check } = require("express-validator")
 const handleValidationErrors = require('./handleValidationErrors')
 
 const validatePostInput = [
-    check('caption')
+    check('note')
         .isLength({ max: 300 })
-        .withMessage('Caption must be less than 300 characters'),
+        .withMessage('Note must be less than 300 characters'),
     check('author')
         .exists({ checkFalsy: true }),
+    check('high')
+        .isLength({max: 100})
+        .withMessage('High must be less than 100 characters'),
     handleValidationErrors
 ];
 

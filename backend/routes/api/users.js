@@ -18,9 +18,7 @@ router.get('/', function(req, res, next) {
 
 // Sign up user
 router.post('/register', validateRegisterInput, async (req, res, next) => {
-  const user = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }]
-  })
+  const user = await User.findOne({ email: req.body.email })
 
   if (user) {
     const err = new Error("Validation")
@@ -30,16 +28,13 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     if(user.email === req.body.email){
       errors.email = "That email has already been taken"
     }
-    if(user.username === req.body.username) {
-      errors.username = "That username has already been taken"
-    }
 
     err.errors = errors
     return next(err)
   }
 
   const newUser = new User({
-    username: req.body.username,
+    name: req.body.name,
     email: req.body.email
   })
 
@@ -82,7 +77,7 @@ router.get('/current', restoreUser, (req, res) => {
   if(!req.user) return res.json(null)
   res.json({
     _id: req.user._id,
-    username: req.user.username,
+    name: req.user.name,
     email: req.user.email
   })
 })
