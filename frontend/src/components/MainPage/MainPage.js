@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { Calendar } from "../Calendar/CalendarComponent"
+import { Calendar } from "../Calendar/Calendar"
 import { Dock } from "../Dock/Dock"
 import { SplashPage } from "../SplashPage/SplashPage"
 import './MainPage.css'

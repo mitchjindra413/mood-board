@@ -10,6 +10,8 @@ const validatePostInput = [
     check('high')
         .isLength({max: 100})
         .withMessage('High must be less than 100 characters'),
+    check('rating')
+        .isInt({ min: 0, max: 5 }),
     handleValidationErrors
 ];
 

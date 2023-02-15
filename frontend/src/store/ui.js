@@ -2,6 +2,8 @@ const SHOW_LOGIN_MODAL = 'ui/SHOW_LOGIN_MODAL'
 const HIDE_MODAL = 'ui/HIDE_MODAL'
 const SHOW_SIGNUP_MODAL = 'ui/SHOW_SIGNUP_MODAL'
 const SHOW_POST_MODAL = 'ui/SHOW_POST_MODAL'
+const IS_LOADING = 'ui/IS_LOADING'
+const FINISHED_LOADING = 'ui/FINISHED_LOADING'
 
 export const showLoginModal = () => ({
     type: SHOW_LOGIN_MODAL
@@ -20,16 +22,28 @@ export const showPostModal = (postId) => ({
     postId
 })
 
-const uiReducer = (state = {modal: '', postModal: ''}, action) => {
+export const isLoading = () => ({
+    type: IS_LOADING
+})
+
+export const finishedLoading = () => ({
+    type: FINISHED_LOADING
+})
+
+const uiReducer = (state = {modal: '', postModal: '', loading: false}, action) => {
     switch (action.type) {
         case SHOW_LOGIN_MODAL:
-            return { modal: 'login' }
+            return { ...state, modal: 'login' }
         case HIDE_MODAL:
-            return { modal: null, postModal: null }
+            return { ... state, modal: null, postModal: null }
         case SHOW_SIGNUP_MODAL:
             return { modal: 'signup' }
         case SHOW_POST_MODAL:
-            return { postModal: `${action.postId}` }
+            return { ...state, postModal: `${action.postId}` }
+        case IS_LOADING:
+            return { ...state, loading: true }
+        case FINISHED_LOADING:
+            return { ...state, loading: false }
         default:
             return state
     }

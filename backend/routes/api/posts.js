@@ -30,8 +30,9 @@ router.get('/users/:userId', async (req, res, next) => {
         for (const post of posts) {
             const year = post.createdAt.getFullYear()
             const month = post.createdAt.getMonth()
-            const day = post.createdAt.getDay()
-            postsObj[`${year}-${month}-${day}`] = post
+            const day = post.createdAt.getDate()
+            
+            postsObj[`${month + 1}/${day}/${year}`] = post
         }
         
         return res.json(postsObj)

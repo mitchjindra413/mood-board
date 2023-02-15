@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt"
+import { isLoading, finishedLoading } from "./ui"
 
 const RECEIVE_POSTS = 'posts/RECEIVE_POSTS'
 const RECEIVE_POST = 'posts/RECEIVE_POST'
@@ -25,16 +26,18 @@ export const clearPostErrors = errors => ({
 })
 
 export const fetchPosts = (userId) => async dispatch => {
+    dispatch(isLoading())
     try {
         // const filterParams = new URLSearchParams(filter)
         const res = await jwtFetch(`/api/posts/users/${userId}`)
         const posts = await res.json()
-        console.log(posts)
-        return dispatch(receivePosts(posts))
+        dispatch(receivePosts(posts))
+        dispatch(finishedLoading())
     } catch (err) {
         const res = await err.json()
         if (res.statusCode === 400) {
-            return dispatch(receivePostErrors(res.errors))
+            dispatch(receivePostErrors(res.errors))
+            dispatch(finishedLoading())
         }
     }
 }
