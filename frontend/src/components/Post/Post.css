@@ -1,0 +1,59 @@
+.post-container {
+    background-color: white;
+    
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: baseline;
+}
+
+.post-header img {
+    width: 200px;
+    height:  200px;
+    border-radius: 20px;
+}
+
+.post-header h1 {
+    font-size: 40px;
+    position: relative;
+    bottom: 40px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.post-text-area {
+    border-radius: 20px;
+    background-color: #ebebeb;
+    min-height: 50px;
+}
+
+.post-text-area p {
+    padding: 10px;
+}
+
+.post-body h2 {
+    font-size: 25px;
+    font-weight: 500;
+    padding: 5px 5px;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.rating {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+}

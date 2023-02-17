@@ -26,16 +26,27 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 #modal-content {
     position: absolute;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 20px;
 
     transition-timing-function: ease-in-out;
     animation: growIn 0.3s;
     animation-delay: 0s;
     animation-fill-mode: forwards;
+}
+
+.close-modal {
+    position: absolute;
+    top: -50px;
+    left: -10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 500;
 }

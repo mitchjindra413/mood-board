@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchPosts } from "../../store/posts"
 import { showPostModal } from "../../store/ui"
+import { Post } from "../Post/Post"
 import { PostModal } from "../Post/PostModal"
 import './Calendar.css'
 
@@ -11,7 +12,7 @@ export const Calendar = () => {
     const user = useSelector(state => state.session.user)
     const posts = useSelector(state => state.entities.posts)
     const loading = useSelector(state => state.ui.loading)
-    const modal = useSelector(state => state.ui.postModal)
+    const modal  = useSelector(state => state.ui.postModal)
 
     const [calendar, setCalendar] = useState([])
     const [value, setValue] = useState(moment())
@@ -87,7 +88,9 @@ export const Calendar = () => {
             )
         } else {
             return (
-                calendar.map(week => (
+                <>
+                {modal &&(<PostModal></PostModal>)}
+                {calendar.map(week => (
                     <div className="week" key={week}>
                         {week.map(day => (
                             <button key={day} 
@@ -99,33 +102,32 @@ export const Calendar = () => {
                             </button>
                         ))}
                     </div>
-                ))
+                ))}
+                </>
             )
         }   
     }
 
     return (
-        <>
-            {modal && <PostModal></PostModal>}
-            <div className="calendar">
-                <div className="calendar-heading">
-                    <button className="calendar-selector"
-                        onClick={() => setValue(monthSwitch('-'))}>
-                        <i className="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <div>
-                        {value.format('MMMM')} {value.format('YYYY')}
-                    </div>
-                    <button className="calendar-selector" 
-                        disabled={switchDisable()}
-                        onClick={() => setValue(monthSwitch('+'))}>
-                        <i className="fa-solid fa-chevron-right"></i>
-                    </button>
+        <div className="calendar">
+            <div className="calendar-heading">
+                <button className="calendar-selector"
+                    onClick={() => setValue(monthSwitch('-'))}>
+                    <i className="fa-solid fa-chevron-left"></i>
+                </button>
+                <div>
+                    {value.format('MMMM')} {value.format('YYYY')}
                 </div>
-                <div className="calendar-body">
-                    {buildBody()}
-                </div>
+                <button className="calendar-selector" 
+                    disabled={switchDisable()}
+                    onClick={() => setValue(monthSwitch('+'))}>
+                    <i className="fa-solid fa-chevron-right"></i>
+                </button>
             </div>
-        </>
+            <div className="calendar-body">
+                {buildBody()}
+            </div>
+        </div>
+    
     )
 }

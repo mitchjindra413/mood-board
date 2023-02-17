@@ -60,6 +60,10 @@
     visibility: hidden;
 }
 
+.day:hover {
+    scale: 1.2;
+}
+
 .day:disabled {
     background-color: #ebebeb;
     cursor: auto;
