@@ -12,6 +12,8 @@ const validatePostInput = [
         .withMessage('High must be less than 100 characters'),
     check('rating')
         .isInt({ min: 0, max: 5 }),
+    check('moodPic')
+        .exists({ checkFalsy: true }),
     handleValidationErrors
 ];
 

@@ -5,6 +5,7 @@ const SHOW_POST_MODAL = 'ui/SHOW_POST_MODAL'
 const IS_LOADING = 'ui/IS_LOADING'
 const FINISHED_LOADING = 'ui/FINISHED_LOADING'
 const SHOW_CREATE_POST = 'ui/SHOW_CREATE_POST'
+const EDIT_POST = 'ui/EDIT_POST'
 
 export const showLoginModal = () => ({
     type: SHOW_LOGIN_MODAL

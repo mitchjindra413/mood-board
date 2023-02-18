@@ -5,6 +5,7 @@ import { createPost } from "../../store/posts"
 import './PostForm.css'
 
 export const PostCreate = () => {
+    const user = useSelector(state => state.session.user._id)
     const [note, setNote] = useState('')
     const [rating, setRating] = useState('')
     const [highlight, setHighlight] = useState('')
@@ -12,15 +13,16 @@ export const PostCreate = () => {
 
     const dispatch = useDispatch()
     const errors = useSelector(state => state.errors.posts)
+    console.log(errors)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createPost({
-            note,
-            rating,
-            highlight,
-            pic,
-            date: moment().format('l')
+            note: note,
+            rating: rating,
+            high: highlight,
+            moodPic: pic,
+            author: user,
         }))
     }
 
@@ -58,7 +60,7 @@ export const PostCreate = () => {
                                 onClick={() => setPic(url)}>
                                 <img alt="mood-pic" src={url}
                                     style={url === pic ? { border: '4px solid #222222'} : { border: '4px solid white'}}
-></img>
+                                ></img>
                             </button>
                         )}
                     </figure>
@@ -95,6 +97,7 @@ export const PostCreate = () => {
             <div className="post-form-submit">
                 <button disabled={!rating || !pic || !highlight}>Submit</button>
             </div>
+            {errors && <div>{errors.values().map( err => <p>{err}</p>)}</div>}
         </form>
     )
 }

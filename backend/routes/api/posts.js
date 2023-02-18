@@ -9,7 +9,6 @@ const validatePostInput = require('../../validations/posts')
 
 // Show all posts by User
 router.get('/users/:userId', async (req, res, next) => {
-    console.log(req.params.userId)
     let user;
     try {
         user = await User.findById(req.params.userId)
@@ -59,8 +58,9 @@ router.get('/:id', async (req, res, next) => {
 
 // Make post
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
-    let post = await Post.find({author: req.params._id, createdAt: new Date()})
-    if (post) {
+    let prev = await Post.findOne({author: req.params._id, date: new Date()})
+    if (prev) {
+        console.log(prev)
         const error = new Error('Only one journal per day')
         error.statusCode = 404
         error.errors = { message: 'Only one journal per day' }
@@ -69,9 +69,11 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 
     try {
         const newPost = new Post({
-            note: req.body.caption,
+            note: req.body.note,
             high: req.body.high,
-            author: req.user._id
+            rating: req.body.rating,
+            moodPic: req.body.moodPic,
+            author: req.user._id,
         })
 
         let post = await newPost.save()

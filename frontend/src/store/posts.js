@@ -1,5 +1,6 @@
 import jwtFetch from "./jwt"
 import { isLoading, finishedLoading } from "./ui"
+import moment from "moment"
 
 const RECEIVE_POSTS = 'posts/RECEIVE_POSTS'
 const RECEIVE_POST = 'posts/RECEIVE_POST'
@@ -104,7 +105,7 @@ export const postsReducer = (state = {}, action) => {
         case RECEIVE_POSTS:
             return { ...state, ...action.posts }
         case RECEIVE_POST:
-            return { ...state, [action.post._id]: action.post }
+            return { ...state, [moment(action.post.createdAt).format('l')]: action.post }
         default:
             return state
     }

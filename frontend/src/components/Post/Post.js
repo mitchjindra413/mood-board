@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import moment from "moment"
 import './Post.css'
 
 export const Post = ({postId}) => {
     const post = useSelector(state => state.entities.posts[postId])
     const [month, year] = moment(post.createdAt).format('ll').split(',')
+    const dispatch = useDispatch()
 
     const key = {
         1: '#FFC906',
@@ -44,6 +45,13 @@ export const Post = ({postId}) => {
                     <p>{post.note}</p>
                 </div>
             </div>
+            {moment(post.createdAt).format('l') === moment().format('l') && (
+                <div className="center">
+                    <button className="button-post" onClick={() => dispatch()}>
+                        Edit Post
+                    </button>
+                </div>
+            )}
         </div>
     )
 }

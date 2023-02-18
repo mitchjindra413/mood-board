@@ -15,7 +15,7 @@ const postSchema = Schema({
     moodPic: {
         type: String
     },
-    day: {
+    date: {
         type: Date
     },
     rating: {

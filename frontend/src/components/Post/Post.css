@@ -1,9 +1,10 @@
 .post-container {
     background-color: white;
-    max-height: 100vh;
+    max-height: 90vh;
     padding: 20px;
     border-radius: 20px;
-    /* overflow-y: scroll; */
+    width: 380px;
+    overflow-y: scroll;
 }
 
 .post-header {
@@ -55,4 +56,16 @@
     color: white;
     font-size: 20px;
     font-weight: 500;
+}
+
+.button-post {
+    margin-top: 10px;
+    background-color: #ebebeb;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }
