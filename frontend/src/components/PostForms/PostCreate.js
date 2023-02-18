@@ -32,43 +32,67 @@ export const PostCreate = () => {
         5: '#0A6E8F'
     }
 
+    const urls = [
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path86.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path62.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path70.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path84.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path78.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path80.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path82.png', 
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path96.png',
+        'https://mood-seed.s3.us-west-1.amazonaws.com/emojis/path88.png'
+    ]
+
     return (
         <form className="post-form-container" onSubmit={(e) => handleSubmit(e)}>
-            <div>
-                <h1>Post for:</h1>
-                <h1>{moment().format('l')}</h1>
+            <div className="post-form-header">
+                <h1>Post for: {moment().format('l')}</h1>
             </div>
-            <div>
+            <div className="post-form-body">
                 <label>Choose a photo:
-
-                </label>
-                <label>Rating:
-                    <div>
-                        {[1, 2, 3, 4, 5].map(val =>
-                            <button type="button" key={val}
-                                className="rating"
-                                style={rating === val ? { border: '2px solid #222222', backgroundColor: key[val] } : { backgroundColor: key[val]}}
-                                onClick={() => setRating(val)}
-                            >
-                                {val}
+                    <figure className="photo-grid">
+                        {urls.map(url => 
+                            <button type="button" key={url}
+                                className="mood-pic-post-form"
+                                onClick={() => setPic(url)}>
+                                <img alt="mood-pic" src={url}
+                                    style={url === pic ? { border: '4px solid #222222'} : { border: '4px solid white'}}
+></img>
                             </button>
                         )}
-                    </div>
+                    </figure>
                 </label>
-                <label>Highlight:
-                    <input value={highlight}
-                        onChange={e => setHighlight(e.target.value)}
-                        type="text">
-                    </input>
-                </label>
-                <label>Note:
-                    <textarea value={note} 
-                        placeholder='Write about your day'
-                        onChange={(e) => setNote(e.target.value)}>
-                    </textarea>
-                </label>
+                <div className="post-form-body-right">
+                    <label>Rating:
+                        <div className="rating-container">
+                            {[1, 2, 3, 4, 5].map(val =>
+                                <button type="button" key={val}
+                                    className="rating"
+                                    style={rating === val ? { border: '2px solid #222222', backgroundColor: key[val] } : { backgroundColor: key[val]}}
+                                    onClick={() => setRating(val)}
+                                >
+                                    {val}
+                                </button>
+                            )}
+                        </div>
+                    </label>
+                    <label>Highlight:
+                        <input value={highlight}
+                            onChange={e => setHighlight(e.target.value)}
+                            type="text">
+                        </input>
+                    </label>
+                    <label>Note:
+                        <textarea value={note} 
+                            rows="11"
+                            placeholder='Write about your day'
+                            onChange={(e) => setNote(e.target.value)}>
+                        </textarea>
+                    </label>
+                </div>
             </div>
-            <div>
+            <div className="post-form-submit">
                 <button disabled={!rating || !pic || !highlight}>Submit</button>
             </div>
         </form>

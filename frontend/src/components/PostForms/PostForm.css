@@ -3,5 +3,78 @@
     max-height: 100vh;
     padding: 20px;
     border-radius: 20px;
-    
+    width: 90vw;
+}
+
+.post-form-header {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.post-form-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+}
+
+.photo-grid img {
+    border-radius: 20px;
+}
+
+.mood-pic-post-form {
+    height: 150px;
+    width: 150px;
+}
+
+.post-form-body label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.post-form-body-right {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.post-form-body-right label{
+    display: flex;
+    flex-direction: column;
+}
+
+.post-form-body-right textarea {
+    font-size: 16px;
+    background-color: #ebebeb;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.post-form-body-right input {
+    font-size: 16px;
+    background-color: #ebebeb;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.post-form-submit {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.post-form-submit button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: rgb(158, 208, 152);
+}
+
+.post-form-submit button:disabled {
+    background-color: #ebebeb;
 }
