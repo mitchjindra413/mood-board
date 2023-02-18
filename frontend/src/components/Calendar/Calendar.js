@@ -2,7 +2,7 @@ import moment from "moment"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchPosts } from "../../store/posts"
-import { showPostModal } from "../../store/ui"
+import { showCreatePost, showPostModal } from "../../store/ui"
 import { Post } from "../Post/Post"
 import { PostModal } from "../Post/PostModal"
 import './Calendar.css'
@@ -80,6 +80,15 @@ export const Calendar = () => {
         return {}
     }
 
+    const handleClick = (day) => {
+        if(posts[day]){
+            dispatch(showPostModal(day))
+        } else if (day === today.format('l')) {
+            dispatch(showCreatePost())
+        }
+        else {}
+    }
+
     const buildBody = () => {
         if(loading){
             return (
@@ -97,7 +106,7 @@ export const Calendar = () => {
                                 className={styling(day)} 
                                 disabled={buttonDisable(day)}
                                 style={sColor(day)}
-                                onClick={() => dispatch(showPostModal(day.format('l')))}>
+                                onClick={() => handleClick(day.format('l'))}>
                                 {day.format('D')}
                             </button>
                         ))}
@@ -113,15 +122,15 @@ export const Calendar = () => {
             <div className="calendar-heading">
                 <button className="calendar-selector"
                     onClick={() => setValue(monthSwitch('-'))}>
-                    <i className="fa-solid fa-chevron-left"></i>
+                    <i className="fa-solid fa-chevron-left left-right"></i>
                 </button>
-                <div>
+                <div className="month-year">
                     {value.format('MMMM')} {value.format('YYYY')}
                 </div>
                 <button className="calendar-selector" 
                     disabled={switchDisable()}
                     onClick={() => setValue(monthSwitch('+'))}>
-                    <i className="fa-solid fa-chevron-right"></i>
+                    <i className="fa-solid fa-chevron-right left-right"></i>
                 </button>
             </div>
             <div className="calendar-body">

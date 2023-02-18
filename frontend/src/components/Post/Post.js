@@ -4,6 +4,7 @@ import './Post.css'
 
 export const Post = ({postId}) => {
     const post = useSelector(state => state.entities.posts[postId])
+    const [month, year] = moment(post.createdAt).format('ll').split(',')
 
     const key = {
         1: '#FFC906',
@@ -18,7 +19,10 @@ export const Post = ({postId}) => {
         <div className="post-container">
             <div className="post-header">
                 <img src={post.moodPic}></img>
-                <h1>{moment(post.createdAt).format('LL')}</h1>
+                <div className="date-container">
+                    <h1>{month}</h1>
+                    <h1>{year}</h1>
+                </div>
             </div>
             <div className="rating-container">
                 {[1,2,3,4,5].map(val => 
