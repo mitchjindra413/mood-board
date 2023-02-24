@@ -1,0 +1,39 @@
+.splash-nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8vw;
+    z-index: 1;
+    align-items: center;
+}
+
+.splash-nav h2{
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.nav-button {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    width: 50px;
+    text-align: center;
+}
+
+.splash-1 {
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230099ff' fill-opacity='1' d='M0 128L34.3 122.7C68.6 117 137 107 206 138.7C274.3 171 343 245 411 277.3C480 309 549 299 617 277.3C685.7 256 754 224 823 224C891.4 224 960 256 1029 256C1097.1 256 1166 224 1234 186.7C1302.9 149 1371 107 1406 85.3L1440 64L1440 320L1405.7 320C1371.4 320 1303 320 1234 320C1165.7 320 1097 320 1029 320C960 320 891 320 823 320C754.3 320 686 320 617 320C548.6 320 480 320 411 320C342.9 320 274 320 206 320C137.1 320 69 320 34 320L0 320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-1 h1 {
+    font-size: 60px;
+    font-weight: 500;
+    padding-bottom: 20px;
+}

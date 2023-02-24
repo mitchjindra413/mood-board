@@ -3,5 +3,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
+}
+
+.dock-container {
+    height: 50px;
+    background-color: white;
+    min-width: 380px;
+    width: 50vw;
+    height: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgb(0 0 0 / 12%);
+    display: flex;
     justify-content: space-around;
+    align-items: center;
+
+    position: fixed;
+    top: 90vh;
+    z-index: 1;
 }

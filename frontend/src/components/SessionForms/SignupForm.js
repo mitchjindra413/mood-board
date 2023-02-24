@@ -53,7 +53,7 @@ function SignupForm() {
 
     return (
         <form className="session-form" onSubmit={userSubmit}>
-            <h2>Sign Up Form</h2>
+            <h2>Signup</h2>
             <div className="errors">{errors?.email}</div>
             <label>
                 <span>Email</span>
@@ -92,11 +92,10 @@ function SignupForm() {
                     placeholder="Confirm Password"
                 />
             </label>
-            <input
-                type="submit"
-                value="Sign Up"
-                disabled={!email || !name || !password || password !== password2}
-            />
+            <button
+                className='submit-button'
+                disabled={!email || !password || password !== password2}
+            >Signup</button>
         </form>
     );
 }
