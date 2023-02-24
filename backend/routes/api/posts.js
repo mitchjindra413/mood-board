@@ -6,6 +6,7 @@ const User = mongoose.model('User')
 const Post = mongoose.model('Post')
 const {requireUser} = require('../../config/passport')
 const validatePostInput = require('../../validations/posts')
+const moment = require('moment')
 
 // Show all posts by User
 router.get('/users/:userId', async (req, res, next) => {
@@ -85,15 +86,18 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 
 // Edit post
 router.put('/:postId', requireUser, validatePostInput, async(req, res, next) => {
+    console.log(req.params)
     try {
-        const post = await Post.findById(req.params.postId)
+        let post = await Post.findById(req.params.postId)
 
         if (req.user._id.toString() === post.author.toString()) {
-            if(post.update(req.body)){
-                
-            }
-
+            post.note = req.body.note
+            post.rating = req.body.rating
+            post.moodPic = req.body.moodPic
+            post.high = req.body.high
+            post.save()
             return res.json(post);
+            
         } else {
             const error = new Error('Not owner of post')
             error.statusCode = 404

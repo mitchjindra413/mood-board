@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import moment from "moment"
 import './Post.css'
+import { hideModal, showEditPost } from "../../store/ui"
 
 export const Post = ({postId}) => {
     const post = useSelector(state => state.entities.posts[postId])
@@ -47,7 +48,7 @@ export const Post = ({postId}) => {
             </div>
             {moment(post.createdAt).format('l') === moment().format('l') && (
                 <div className="center">
-                    <button className="button-post" onClick={() => dispatch()}>
+                    <button className="button-post" onClick={() => { dispatch(hideModal()); dispatch(showEditPost(moment(post.createdAt).format('l')))}}>
                         Edit Post
                     </button>
                 </div>

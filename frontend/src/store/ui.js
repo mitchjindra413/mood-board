@@ -36,12 +36,18 @@ export const showCreatePost = () => ({
     type: SHOW_CREATE_POST
 })
 
-const uiReducer = (state = {modal: '', postModal: '', loading: false}, action) => {
+export const showEditPost = (postId) => ({
+    type: EDIT_POST,
+    postId
+})
+
+const inital = { modal: '', postModal: '', editPost: '', loading: false }
+const uiReducer = (state = inital, action) => {
     switch (action.type) {
         case SHOW_LOGIN_MODAL:
             return { ...state, modal: 'login' }
         case HIDE_MODAL:
-            return { ... state, modal: null, postModal: null }
+            return { ...inital }
         case SHOW_SIGNUP_MODAL:
             return { modal: 'signup' }
         case SHOW_POST_MODAL:
@@ -52,6 +58,8 @@ const uiReducer = (state = {modal: '', postModal: '', loading: false}, action) =
             return { ...state, loading: false }
         case SHOW_CREATE_POST:
             return { ...state, modal: 'createPost'}
+        case EDIT_POST:
+            return { ...state, editPost: `${action.postId}`}
         default:
             return state
     }

@@ -1,23 +1,24 @@
 import moment from "moment"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createPost } from "../../store/posts"
+import { updatePost } from "../../store/posts"
 import './PostForm.css'
 
-export const PostCreate = () => {
+export const PostEdit = ({id}) => {
     const user = useSelector(state => state.session.user._id)
-    const [note, setNote] = useState('')
-    const [rating, setRating] = useState('')
-    const [highlight, setHighlight] = useState('')
-    const [pic, setPic] = useState('')
+    const post = useSelector(state => state.entities.posts[id])
+
+    const [note, setNote] = useState(post.note)
+    const [rating, setRating] = useState(post.rating)
+    const [highlight, setHighlight] = useState(post.high)
+    const [pic, setPic] = useState(post.moodPic)
 
     const dispatch = useDispatch()
     const errors = useSelector(state => state.errors.posts)
-    console.log(errors)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(createPost({
+        dispatch(updatePost(post._id, {
             note: note,
             rating: rating,
             high: highlight,
@@ -49,7 +50,7 @@ export const PostCreate = () => {
     return (
         <form className="post-form-container" onSubmit={(e) => handleSubmit(e)}>
             <div className="post-form-header">
-                <h1>Create post for: {moment().format('l')}</h1>
+                <h1>Edit post for: {moment().format('l')}</h1>
             </div>
             <div className="post-form-body">
                 <label>Choose a photo:
