@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Post } from "../Post/Post"
 import { useEffect } from "react"
 import { fetchPosts } from "../../store/posts"
+import './Postview.css'
 import moment from "moment"
 
 export const PostView = () => {
@@ -14,15 +15,12 @@ export const PostView = () => {
     }, [])
 
     return (
-        <div>
-            {posts.map(post => 
+        <div className="posts-container">
+            {posts.sort((a, b) => { return b - a }).map(post => 
                 <div key={post} style={{ paddingBottom: '20px' }}>
                     <Post  postId={post}></Post>
                 </div>
             )}
-            <div style={{ height: '70px' }}>
-
-            </div>
         </div>
     )
 }

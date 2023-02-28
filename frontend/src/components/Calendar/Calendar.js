@@ -3,8 +3,6 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchPosts } from "../../store/posts"
 import { showCreatePost, showPostModal } from "../../store/ui"
-import { PostModal } from "../Post/PostModal"
-import { PostEditModal } from "../PostForms/PostEditModal"
 import './Calendar.css'
 
 export const Calendar = () => {
@@ -12,8 +10,6 @@ export const Calendar = () => {
     const user = useSelector(state => state.session.user)
     const posts = useSelector(state => state.entities.posts)
     const loading = useSelector(state => state.ui.loading)
-    const modal  = useSelector(state => state.ui.postModal)
-    const edit = useSelector(state => state.ui.editPost)
 
     const [calendar, setCalendar] = useState([])
     const [value, setValue] = useState(moment())
@@ -99,8 +95,6 @@ export const Calendar = () => {
         } else {
             return (
                 <>
-                {modal &&(<PostModal></PostModal>)}
-                {edit && (<PostEditModal></PostEditModal>)}
                 {calendar.map(week => (
                     <div className="week" key={week}>
                         {week.map(day => (

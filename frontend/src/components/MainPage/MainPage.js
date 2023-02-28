@@ -6,6 +6,9 @@ import './MainPage.css'
 import { logout } from "../../store/session"
 import { PostView } from "../PostView/PostView"
 import { useHistory, useParams } from "react-router-dom"
+import { PostModal } from "../Post/PostModal"
+import { PostEditModal } from "../PostForms/PostEditModal"
+import { Chart } from "../Chart/Chart"
 
 export const MainPage = () => {
     const user = useSelector(state => state.session.user)
@@ -13,6 +16,8 @@ export const MainPage = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const {view} = useParams()
+    const edit = useSelector(state => state.ui.editPost)
+    const postModal = useSelector(state => state.ui.postModal)
     
     if(!user){
         <>
@@ -21,17 +26,22 @@ export const MainPage = () => {
     }
     return (
         <div className="mainpage-container">
-            <div className='dock-container'>
-                <i className="fa-solid fa-calendar" onClick={() => history.push('/')}></i>
-                <i className="fa-solid fa-bars" onClick={() => history.push('/posts')}></i>
-                <i className="fa-solid fa-chart-simple" onClick={() => history.push('/chart')}></i>
-                <i className="fa-solid fa-right-from-bracket" onClick={() => dispatch(logout())}></i>
+            {postModal && (<PostModal></PostModal>)}
+            {edit && (<PostEditModal></PostEditModal>)}
+            <div className="main-content">
+                {modal === 'createPost' &&(<PostCreateModal/>)}
+                {!view && <Calendar/>}
+                {view === 'posts' && <PostView/>}
+                {view === 'chart' && <Chart/>}
             </div>
-
-            {modal === 'createPost' &&(<PostCreateModal/>)}
-            {!view && <Calendar/>}
-            {view === 'posts' && <PostView/>}
-            {view === 'chart' && <div>Comming soon</div>}
+            <div style={{height: '65px'}}>
+                <div className='dock-container'>
+                    <button><i className="fa-solid fa-calendar" onClick={() => history.push('/')}></i></button>
+                    <button><i className="fa-solid fa-rectangle-list" onClick={() => history.push('/posts')}></i></button>
+                    <button><i className="fa-solid fa-chart-simple" onClick={() => history.push('/chart')}></i></button>
+                    <button><i className="fa-solid fa-right-from-bracket" onClick={() => dispatch(logout())}></i></button>
+                </div>
+            </div>
             
         </div>
     )
