@@ -9,6 +9,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { PostModal } from "../Post/PostModal"
 import { PostEditModal } from "../PostForms/PostEditModal"
 import { Chart } from "../Chart/Chart"
+import { FadeIn } from "../../context/FadeIn/FadeIn"
 
 export const MainPage = () => {
     const user = useSelector(state => state.session.user)
@@ -30,7 +31,7 @@ export const MainPage = () => {
             {edit && (<PostEditModal></PostEditModal>)}
             <div className="main-content">
                 {modal === 'createPost' &&(<PostCreateModal/>)}
-                {!view && <Calendar/>}
+                {!view && <FadeIn><Calendar /></FadeIn>}
                 {view === 'posts' && <PostView/>}
                 {view === 'chart' && <Chart/>}
             </div>

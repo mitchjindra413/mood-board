@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal } from '../../context/Modal'
+import { Modal } from '../../context/Modal/Modal'
 import { hideModal } from '../../store/ui'
 import { Post } from './Post'
 

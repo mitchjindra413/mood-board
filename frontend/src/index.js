@@ -5,7 +5,7 @@ import App from './App';
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import configureStore from './store/store'
-import { ModalProvider } from './context/Modal';
+import { ModalProvider } from './context/Modal/Modal';
 
 let store = configureStore({})
 

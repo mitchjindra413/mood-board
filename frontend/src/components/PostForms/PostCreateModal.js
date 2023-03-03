@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { Modal } from "../../context/Modal"
+import { Modal } from "../../context/Modal/Modal"
 import { hideModal } from "../../store/ui"
 import { PostCreate } from "./PostCreate"
 

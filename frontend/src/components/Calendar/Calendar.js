@@ -15,17 +15,20 @@ export const Calendar = () => {
     const [value, setValue] = useState(moment())
     const today = moment()
 
-    const startMonth = value.clone().startOf("month").startOf("week")
-    const endMonth = value.clone().endOf("month").endOf('week')
+    const startMonth = value.clone().startOf('month')
+    const endMonth = value.clone().endOf('month')
+
+    const startMonthWeek = value.clone().startOf("month").startOf("week")
+    const endMonthWeek = value.clone().endOf("month").endOf('week')
 
     useEffect(() => {
         dispatch(fetchPosts( user._id ))
     }, [value])
     
     useEffect(() => {
-        const day = startMonth.clone().subtract(1, 'day')
+        const day = startMonthWeek.clone().subtract(1, 'day')
         const temp = []
-        while (day.isBefore(endMonth, 'day')) {
+        while (day.isBefore(endMonthWeek, 'day')) {
             temp.push(Array(7).fill(0).map(() => day.add(1, 'day').clone()))
         }
         setCalendar(temp)
@@ -58,6 +61,10 @@ export const Calendar = () => {
 
     const sColor = (day) => {
         const date = day.format('l')
+        
+        if (day.isBefore(startMonth, 'day') || day.isAfter(endMonth, 'day')){
+            return {visability: 'hidden'}
+        }
     
         if(posts[date]){
             switch(posts[date].rating){

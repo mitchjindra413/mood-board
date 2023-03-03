@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
-import { hideModal } from "../store/ui";
+import { hideModal } from "../../store/ui";
 import './Modal.css'
 
 const ModalContext = createContext()

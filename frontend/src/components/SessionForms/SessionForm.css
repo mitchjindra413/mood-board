@@ -7,7 +7,7 @@
   background-color: white;
   border-radius: 10px;
   width: 380px;
-  height: 400px;
+  min-height: 400px;
   box-shadow: 0 6px 16px rgb(0 0 0 / 12%);
 }
 
@@ -38,7 +38,7 @@
   text-align: center;
   border-radius: 20px;
   padding: 10px;
-  background-color: #40BCC9;
+  background-color: #0099ff;
   color: white;
 }
 
