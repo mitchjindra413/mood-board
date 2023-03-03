@@ -2,6 +2,7 @@ import {
     AnimatedAxis, 
     AnimatedGrid,
     AnimatedLineSeries,
+    AnimatedBarSeries,
     XYChart,
     Tooltip,
     AnimatedGlyphSeries
@@ -13,14 +14,14 @@ import { useEffect, useState } from 'react';
 export const LineGraph = () => {
     const posts = useSelector(state => state.entities.posts)
     const [values, setValues] = useState([])
+    const beginWeek = moment()
+    const endWeek = moment().endOf('week')
 
     useEffect(() => {
         
         let start = moment().startOf('week')
         const end = moment().endOf('week').add(1, 'day')
         const valueArr = []
-
-        console.log(start, end)
 
         while (start.isBefore(end, 'day')) {
             let format = start.clone().format('l')
@@ -37,15 +38,11 @@ export const LineGraph = () => {
             
             start = temp
         }
-        console.log('exited')
-        console.log(valueArr)
         setValues(valueArr)
     }, [])
 
-    // console.log(values)
-
     const accessors = {
-        xAccessor: (d) => moment(d.date).format('l'),
+        xAccessor: (d) => moment(d.date).format('ddd'),
         yAccessor: (d) => d.rating,
         colorAccessor: (d) => key[d.rating]
     };
@@ -60,16 +57,17 @@ export const LineGraph = () => {
     }
     
     return (
-        <XYChart height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear', domain: [0, 5] }}>
-            <AnimatedAxis orientation="bottom" />
+        <XYChart height={400} xScale={{ type: 'band'}} yScale={{ type: 'linear', domain: [0, 5] }}>
+            <AnimatedAxis orientation="bottom"/>
             <AnimatedAxis orientation='left' numTicks={5} hideZero={true} stroke={'black'} tickValues={[1,2,3,4,5]}/>
-            <AnimatedLineSeries dataKey="Date" data={values} {...accessors} 
+            {/* <AnimatedLineSeries dataKey="Date" data={values} {...accessors} 
                 stroke={"black"}
                 // curve={curveCatmullRom}
-                />
-            <AnimatedGlyphSeries dataKey="point" data={values} {...accessors} 
+                /> */}
+            {/* <AnimatedGlyphSeries dataKey="point" data={values} {...accessors} 
                 size={15}
-                />
+                /> */}
+            <AnimatedBarSeries dataKey='val' data={values} {...accessors} radius={200} radiusTop={true} />
             <Tooltip
                 snapTooltipToDatumX
                 snapTooltipToDatumY

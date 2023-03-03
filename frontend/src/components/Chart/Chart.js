@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { LineGraph } from "./LineGraph"
 import { fetchPosts } from "../../store/posts"
@@ -7,9 +7,10 @@ import moment from "moment"
 
 export const Chart = () => {
     const user = useSelector(state => state.session.user)
+    const [baseDay, setBaseDay] = useState(moment())
     const dispatch = useDispatch()
-    const start = moment().startOf('week')
-    const end = moment().endOf('week')
+    const start = baseDay.clone().startOf('week')
+    const end = baseDay.clone().endOf('week')
     const loading = useSelector(state => state.ui.loading)
 
     useEffect(() => {
@@ -25,8 +26,16 @@ export const Chart = () => {
     }
 
     return (
-        <div className="line-graph-container">
-            <LineGraph />
+        <div>
+            <div className="header-chart">
+                <h1>WEEK</h1>
+            </div>
+            <div className="line-graph-container">
+                <LineGraph />
+            </div>
+            <div className="highlights-chart">
+
+            </div>
         </div>
         
     )

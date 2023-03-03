@@ -13,7 +13,7 @@ export const PostCreate = () => {
 
     const dispatch = useDispatch()
     const errors = useSelector(state => state.errors.posts)
-    console.log(errors)
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()

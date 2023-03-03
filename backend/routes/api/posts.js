@@ -38,7 +38,6 @@ router.get('/users/:userId', async (req, res, next) => {
         return res.json(postsObj)
         
     } catch(err) {
-        console.log(err)
         return res.json([])
     }
 })
@@ -61,7 +60,6 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
     let prev = await Post.findOne({author: req.params._id, date: new Date()})
     if (prev) {
-        console.log(prev)
         const error = new Error('Only one journal per day')
         error.statusCode = 404
         error.errors = { message: 'Only one journal per day' }
@@ -86,7 +84,7 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 
 // Edit post
 router.put('/:postId', requireUser, validatePostInput, async(req, res, next) => {
-    console.log(req.params)
+    
     try {
         let post = await Post.findById(req.params.postId)
 
