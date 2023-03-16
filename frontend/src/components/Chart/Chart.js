@@ -28,10 +28,10 @@ export const Chart = () => {
     return (
         <div>
             <div className="header-chart">
-                <h1>WEEK</h1>
+                <h1>{start.format('l')} - {end.format('l')}</h1>
             </div>
             <div className="line-graph-container">
-                <LineGraph />
+                <LineGraph baseDay={baseDay}/>
             </div>
             <div className="highlights-chart">
 

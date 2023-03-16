@@ -11,16 +11,13 @@ import moment from 'moment';
 import { useSelector } from "react-redux"
 import { useEffect, useState } from 'react';
 
-export const LineGraph = () => {
+export const LineGraph = ({baseDay}) => {
     const posts = useSelector(state => state.entities.posts)
     const [values, setValues] = useState([])
-    const beginWeek = moment()
-    const endWeek = moment().endOf('week')
 
     useEffect(() => {
-        
-        let start = moment().startOf('week')
-        const end = moment().endOf('week').add(1, 'day')
+        let start = baseDay.clone().startOf('week')
+        const end = baseDay.clone().endOf('week').add(1, 'day')
         const valueArr = []
 
         while (start.isBefore(end, 'day')) {
@@ -39,7 +36,7 @@ export const LineGraph = () => {
             start = temp
         }
         setValues(valueArr)
-    }, [])
+    }, [baseDay])
 
     const accessors = {
         xAccessor: (d) => moment(d.date).format('ddd'),

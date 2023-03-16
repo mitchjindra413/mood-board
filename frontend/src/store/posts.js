@@ -1,5 +1,5 @@
 import jwtFetch from "./jwt"
-import { isLoading, finishedLoading } from "./ui"
+import { isLoading, finishedLoading, hideModal } from "./ui"
 import moment from "moment"
 
 const RECEIVE_POSTS = 'posts/RECEIVE_POSTS'
@@ -64,6 +64,7 @@ export const createPost = (postData) => async dispatch => {
         });
         const post = await res.json();
         dispatch(receivePost(post));
+        dispatch(hideModal());
     } catch (err) {
         const res = await err.json();
         if (res.statusCode === 400) {
@@ -80,6 +81,7 @@ export const updatePost = (postId, postData) => async dispatch => {
         })
         const post = await res.json()
         dispatch(receivePost(post))
+        dispatch(hideModal())
     } catch (err) {
         const res = await err.json()
         if (res.statusCode === 400){

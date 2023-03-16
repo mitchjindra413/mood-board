@@ -8,13 +8,11 @@ import { showCreatePost } from "../../store/ui"
 import { FadeIn } from "../../context/FadeIn/FadeIn"
 
 export const PostView = () => {
-    const posts = useSelector(state => Object.keys(state.entities.posts))
+    const posts = useSelector(state => Object.keys(state.entities.posts).sort((a, b) => { return b - a }))
     const postsObj = useSelector(state => state.entities.posts)
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const today = moment().format('l')
-
-    console.log(postsObj[today])
     
     useEffect(() => {
         dispatch(fetchPosts(user._id))
@@ -25,7 +23,7 @@ export const PostView = () => {
             {!postsObj[today] &&(
                 <button className="posts-view-create" onClick={() => dispatch(showCreatePost())}>+ Today</button>
             )}
-            {posts.sort((a, b) => { return b - a }).map(post =>
+            {posts.map(post =>
                 <FadeIn>
                     <div key={post} style={{ paddingBottom: '20px' }}>
                         <Post  postId={post}></Post>
