@@ -28,7 +28,7 @@ export const LineGraph = ({baseDay}) => {
                 temp.rating = posts[format].rating
                 valueArr.push(temp)
             } else {
-                valueArr.push({date: start})
+                valueArr.push({date: start, rating: 0})
             }
 
             let temp = start.clone().add(1, 'day')

@@ -24,7 +24,9 @@ function App() {
 
   return loaded && (
     <Switch>
-      <Route path='/:view' component={user ? MainPage : SplashPage}></Route>
+      <Route exact path='/posts' component={user ? MainPage : SplashPage}></Route>
+      <Route exact path='/chart' component={user ? MainPage : SplashPage}></Route>
+      <Route exact path='/calendar' component={user ? MainPage : SplashPage}></Route>
       <Route path="/" component={user ? MainPage : SplashPage}/>
     </Switch>
   );

@@ -1,9 +1,25 @@
+@media (min-width: 0px) {
+    .post-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 80vw;
+    }
+}
+
+@media (min-width: 850px) {
+    .post-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+        width: 70vw;
+    }
+}
+
 .post-container {
     background-color: white;
     max-height: 90vh;
     padding: 20px;
     border-radius: 20px;
-    width: 380px;
     overflow-y: scroll;
     box-shadow: 0 6px 6px rgb(0 0 0 / 10%);
 }
@@ -35,6 +51,10 @@
     padding: 10px;
 }
 
+.note {
+    min-height: 200px;
+}
+
 .post-body h2 {
     font-size: 25px;
     font-weight: 500;
@@ -44,7 +64,7 @@
 .rating-container {
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 .rating {

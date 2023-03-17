@@ -33,8 +33,9 @@ export const Chart = () => {
             <div className="line-graph-container">
                 <LineGraph baseDay={baseDay}/>
             </div>
-            <div className="highlights-chart">
-
+            <div className="adjust-dates">
+                <button onClick={() => setBaseDay(baseDay.clone().subtract(1, 'week'))}><i className="fa-solid fa-chevron-left"></i></button>
+                <button disabled={baseDay.format('l') === moment().format('l') ? true : false} onClick={() => setBaseDay(baseDay.clone().add(1, 'week'))}><i className="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
         

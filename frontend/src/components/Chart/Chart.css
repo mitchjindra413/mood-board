@@ -23,3 +23,23 @@
 .header-chart h1 {
     font-size: 20px;
 }
+
+.adjust-dates {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 20px;
+    width: 380px;
+    
+}
+
+.adjust-dates button{
+    background-color: white;
+    box-shadow: 0 6px 6px rgb(0 0 0 / 10%);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.adjust-dates button:disabled {
+    background-color: #ebebeb;
+    cursor: default;
+}

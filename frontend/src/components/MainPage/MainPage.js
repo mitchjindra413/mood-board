@@ -16,9 +16,19 @@ export const MainPage = () => {
     const modal = useSelector(state => state.ui.modal)
     const dispatch = useDispatch()
     const history = useHistory()
-    const {view} = useParams()
     const edit = useSelector(state => state.ui.editPost)
     const postModal = useSelector(state => state.ui.postModal)
+    console.log(window.location.pathname)
+    const view = () => {
+        switch (window.location.pathname){
+            case '/posts':
+                return <PostView />
+            case '/chart':
+                return <Chart />
+            default:
+                return <FadeIn><Calendar /></FadeIn>
+        }
+    }
     
     if(!user){
         <>
@@ -31,9 +41,7 @@ export const MainPage = () => {
             {edit && (<PostEditModal></PostEditModal>)}
             <div className="main-content">
                 {modal === 'createPost' &&(<PostCreateModal/>)}
-                {!view && <FadeIn><Calendar /></FadeIn>}
-                {view === 'posts' && <PostView/>}
-                {view === 'chart' && <Chart/>}
+                {view()}
             </div>
             <div style={{height: '65px'}}>
                 <div className='dock-container'>
