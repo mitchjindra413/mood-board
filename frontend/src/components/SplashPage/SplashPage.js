@@ -5,6 +5,11 @@ import { LoginFormModal } from "../SessionForms/LoginFormModal"
 import { SignupFormModal } from "../SessionForms/SignupFormModal"
 import './SplashPage.css'
 import { FadeIn } from "../../context/FadeIn/FadeIn"
+import posts from './posts.jpg'
+import cal from './cal.png'
+import chart from './chart.jpg'
+import alarm from './alarm.png'
+
 
 export const SplashPage = () => {
     const dispatch = useDispatch()
@@ -58,17 +63,17 @@ export const SplashPage = () => {
                     <div className="splash-3-container">
                         <div className="splash-3-grid">
                             <div className="img-div">
-                                <img className="splash-3-img" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800">
+                                <img className="splash-3-img" src={cal}>
                                 </img>
                                 <h3>Calendar</h3>
                             </div>
                             <div className="img-div">
-                                <img className="splash-3-img" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800">
+                                <img className="splash-3-img" src={posts}>
                                 </img>
                                 <h3>Post</h3>
                             </div>
                             <div className="img-div">
-                                <img className="splash-3-img" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800">
+                                <img className="splash-3-img" src={chart}>
                                 </img>
                                 <h3>Chart</h3>
                             </div>
@@ -76,8 +81,10 @@ export const SplashPage = () => {
                     </div>
                 </FadeIn>
             </div>
-            <div className="space-div">
-
+            <div className="space-div"></div>
+            <div className="splash-4">
+                <p>To keep feelings fresh, journals can only be created on the day</p>
+                <img alt="alarm" src={alarm} className="alarm-img"></img>
             </div>
         </div>
     )

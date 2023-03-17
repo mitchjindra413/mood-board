@@ -25,10 +25,11 @@
 }
 
 .adjust-dates {
+    padding-top: 10px;
     display: flex;
     justify-content: space-around;
     border-radius: 20px;
-    width: 380px;
+    width: 300px;
     
 }
 
