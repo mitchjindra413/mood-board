@@ -5,9 +5,6 @@ import { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import './reset.css'
 
-import LoginForm from './components/SessionForms/LoginForm';
-import SignupForm from './components/SessionForms/SignupForm';
-
 import { getCurrentUser } from './store/session';
 
 import { MainPage } from './components/MainPage/MainPage';
@@ -24,9 +21,10 @@ function App() {
 
   return loaded && (
     <Switch>
-      <Route exact path='/posts' component={user ? MainPage : SplashPage}></Route>
-      <Route exact path='/chart' component={user ? MainPage : SplashPage}></Route>
-      <Route exact path='/calendar' component={user ? MainPage : SplashPage}></Route>
+      <ProtectedRoute exact path='/posts' component={MainPage}></ProtectedRoute>
+      <ProtectedRoute exact path='/chart' component={MainPage}></ProtectedRoute>
+      <ProtectedRoute exact path='/calendar' component={MainPage}></ProtectedRoute>
+      
       <Route path="/" component={user ? MainPage : SplashPage}/>
     </Switch>
   );
