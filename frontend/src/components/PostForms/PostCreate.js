@@ -92,12 +92,12 @@ export const PostCreate = () => {
                             onChange={(e) => setNote(e.target.value)}>
                         </textarea>
                     </label>
+                    {errors && <div>{Object.keys(errors).map(key => <p className="errors">{errors[key]}</p>)}</div>}
                 </div>
             </div>
             <div className="post-form-submit">
                 <button disabled={!rating || !pic || !highlight}>Submit</button>
             </div>
-            {errors && <div>{errors.values().map( err => <p>{err}</p>)}</div>}
         </form>
     )
 }
