@@ -18,7 +18,7 @@ export const MainPage = () => {
     const history = useHistory()
     const edit = useSelector(state => state.ui.editPost)
     const postModal = useSelector(state => state.ui.postModal)
-    console.log(window.location.pathname)
+    
     const view = () => {
         switch (window.location.pathname){
             case '/posts':
